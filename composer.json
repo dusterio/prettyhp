@@ -1,0 +1,27 @@
+{
+    "name": "dusterio/prettyhp",
+    "type": "library",
+    "description": "PrettyHP is an opinionated PHP code formatter",
+    "keywords": ["php","prettifier","formatter","pretty","linter","consistency","styling"],
+    "homepage": "https://github.com/dusterio/prettyhp",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Denis Mysenko",
+            "email": "denis@mysenko.com",
+            "homepage": "https://www.mysenko.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "3.7.*",
+        "codeclimate/php-test-reporter": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Dusterio\\PrettyHP\\": "src/"
+        }
+    }
+}
