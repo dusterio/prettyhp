@@ -24,7 +24,7 @@ Your IDE or editor may already have some basic formatting built-in, but:
 ## Installation
 
 ```bash
-$ composer require dusterio/prettyhp --dev
+$ composer require --dev dusterio/prettyhp
 ```
 
 We recommend to add a pre-commit Git hook so that any modified PHP files are
@@ -34,7 +34,9 @@ prettified right before the commit:
 $ cat .git/hooks/pre_commit
 ```
 
-## Usage
+## Manual usage
+
+PrettyHP is meant for PSR 4 compliant files – one file should contain one PHP class.
 
 ```bash
 $ vendor/bin/prettyhp [filename]
