@@ -1,26 +1,40 @@
 <?php
 
-use PhpParser\NodeTraverser;
 use PhpParser\ParserFactory;
-use PhpParser\PrettyPrinter;
+use Dusterio\PrettyHP\Formatters\Pretty;
 
 class SuperTest extends PHPUnit_Framework_TestCase {
+    protected $priorities = [
+        PhpParser\Node\Stmt\Use_::class => 1,
+        PhpParser\Node\Stmt\Namespace_::class => 0,
+    ];
+
     /**
      * @test
      */
     public function first()
     {
         $parser        = (new ParserFactory)->create(ParserFactory::PREFER_PHP7);
-        $traverser     = new NodeTraverser;
-        $prettyPrinter = new PrettyPrinter\Standard;
+        $prettyPrinter = new Pretty;
 
         try {
             $code = file_get_contents(dirname(__FILE__) . '/artifacts/test1.php');
 
-            // parse
             $stmts = $parser->parse($code);
 
-            // pretty print
+            uasort($stmts, function($nodeA, $nodeB) {
+                $classA = get_class($nodeA);
+                $classB = get_class($nodeB);
+
+                $priorityA = isset($this->priorities[$classA]) ? $this->priorities[$classA] : 255;
+                $priorityB = isset($this->priorities[$classB]) ? $this->priorities[$classB] : 255;
+
+                if ($priorityA == $priorityB) {
+                    return 0;
+                }
+                return ($priorityA < $priorityB) ? -1 : 1;
+            });
+
             $code = $prettyPrinter->prettyPrintFile($stmts);
 
             echo $code;
