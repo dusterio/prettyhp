@@ -12,9 +12,13 @@
             "homepage": "https://www.mysenko.com"
         }
     ],
+    "bin": [
+        "bin/prettyhp"
+    ],
     "require": {
         "php": ">=5.5.0",
-        "nikic/php-parser": "^3.0"
+        "nikic/php-parser": "^3.0",
+        "symfony/console": "^3.3"
     },
     "require-dev": {
         "phpunit/phpunit": "3.7.*",

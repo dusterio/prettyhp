@@ -9,6 +9,8 @@ PrettyHP is an opinionated PHP code formatter
 
 It removes all original styling and ensures that all outputted code conforms to a consistent style.
 
+PrettyHP will try to comply with PSR as much as possible.
+
 Inspired by JavaScript's [prettier](https://github.com/prettier/prettier)
 
 ## But why?
@@ -22,7 +24,7 @@ Your IDE or editor may already have some basic formatting built-in, but:
 ## Installation
 
 ```bash
-$ composer require dusterio/prettyhp
+$ composer require dusterio/prettyhp --dev
 ```
 
 We recommend to add a pre-commit Git hook so that any modified PHP files are

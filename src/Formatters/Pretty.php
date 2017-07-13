@@ -23,15 +23,16 @@ class Pretty extends Standard
 
         foreach ($nodes as $key => $node) {
             $comments = $node->getAttribute('comments', array());
+
             if ($comments) {
-                if ($node instanceof Stmt\ClassMethod) $result .= "\n";
+                if (isset($nodes[$key - 1]) && $node instanceof Stmt\ClassMethod && $nodes[$key - 1] instanceof Stmt\ClassMethod) $result .= "\n";
                 $result .= "\n" . $this->pComments($comments);
                 if ($node instanceof Stmt\Nop) {
                     continue;
                 }
             }
 
-            if ($node instanceof Stmt\Class_ && $nodes[$key - 1] instanceof Stmt\Use_) $result .= "\n";
+            if (isset($nodes[$key - 1]) && $node instanceof Stmt\Class_ && $nodes[$key - 1] instanceof Stmt\Use_) $result .= "\n";
             $result .= "\n" . $this->p($node) . ($node instanceof Expr ? ';' : '');
         }
 

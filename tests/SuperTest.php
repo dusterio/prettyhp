@@ -14,7 +14,7 @@ class SuperTest extends PHPUnit_Framework_TestCase {
      */
     public function first()
     {
-        $parser        = (new ParserFactory)->create(ParserFactory::PREFER_PHP7);
+        $parser = (new ParserFactory)->create(ParserFactory::PREFER_PHP7);
         $prettyPrinter = new Pretty;
 
         try {
