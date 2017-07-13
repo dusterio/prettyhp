@@ -1,5 +1,5 @@
 # prettyhp
-![Logo](https://www.mysenko.com/images/prettyhp_logo_512_transp2.png)
+![Logo](https://www.mysenko.com/images/prettyhp_logo_512_transp3.png)
 
 [![Build Status](https://travis-ci.org/dusterio/prettyhp.svg?branch=master)](https://travis-ci.org/dusterio/prettyhp)
 [![Code Climate](https://codeclimate.com/github/dusterio/prettyhp/badges/gpa.svg)](https://codeclimate.com/github/dusterio/prettyhp/badges)
