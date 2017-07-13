@@ -5,6 +5,8 @@
 [![Total Downloads](https://poser.pugx.org/dusterio/prettyhp/downloads)](https://packagist.org/packages/dusterio/prettyhp)
 [![License](https://poser.pugx.org/dusterio/prettyhp/license)](https://packagist.org/packages/dusterio/prettyhp)
 
+[logo]: https://www.mysenko.com/images/prettyhp_logo_512_transp.png "Logo"
+
 PrettyHP is an opinionated PHP code formatter
 
 It removes all original styling and ensures that all outputted code conforms to a consistent style.
