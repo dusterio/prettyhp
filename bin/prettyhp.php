@@ -3,11 +3,7 @@
 
 require(dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . '/bootstrap.php');
 
-use Symfony\Component\Console\Application;
-
-class PrettyHP extends Application {
-}
-
-$application = new PrettyHP();
-$application->setName('PrettyHP - an opinionated PHP code formatter');
+$application = new Symfony\Component\Console\Application();
+$application->setName('PrettyHP - an opinionated PHP code formatter by Denis Mysenko');
+$application->add(new \Dusterio\PrettyHP\Console\Commands\Format());
 $application->run();
