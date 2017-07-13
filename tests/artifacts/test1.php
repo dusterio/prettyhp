@@ -31,6 +31,12 @@ class dAddasss extends
         } catch (PhpParser\Error $e) { echo 'Parse Error: ', $e->getMessage(); }
     }
 
+/**
+     * Something
+ *
+ * test
+     */
+    public function second(){}
 
 
 

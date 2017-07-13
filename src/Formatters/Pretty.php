@@ -2,6 +2,7 @@
 
 namespace Dusterio\PrettyHP\Formatters;
 
+use PhpParser\Comment;
 use PhpParser\Node;
 use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\AssignOp;
@@ -29,6 +30,7 @@ class Pretty extends PrettyPrinterAbstract
         foreach ($nodes as $key => $node) {
             $comments = $node->getAttribute('comments', array());
             if ($comments) {
+                if ($node instanceof Stmt\ClassMethod) $result .= "\n";
                 $result .= "\n" . $this->pComments($comments);
                 if ($node instanceof Stmt\Nop) {
                     continue;
@@ -44,6 +46,25 @@ class Pretty extends PrettyPrinterAbstract
         } else {
             return $result;
         }
+    }
+
+    /**
+     * Prints reformatted text of the passed comments.
+     *
+     * @param Comment[] $comments List of comments
+     *
+     * @return string Reformatted text of comments
+     */
+    protected function pComments(array $comments) {
+        $formattedComments = [];
+
+        foreach ($comments as $comment) {
+            $formattedComments[] = $comment->getReformattedText();
+        }
+
+        $comments = implode("\n", $formattedComments);
+
+        return preg_replace('/(\*\n\s*\*\s*\n)/', '', $comments);
     }
 
     // Special nodes
