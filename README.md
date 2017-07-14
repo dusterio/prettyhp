@@ -23,6 +23,17 @@ Your IDE or editor may already have some basic formatting built-in, but:
 - Different team members may have different editors, views and standards;
 - At least PhpStorm doesn't really enforce styling, it just does some basic indenting.
 
+Why not use existing PHP code formatters?
+
+### phpfmt
+
+phpfmt is officially closed, the repo is deleted by the authors.
+
+### php-cs-fixer
+
+I'm a very experienced developer and Linux user, yet I couldn't get it up and running in 10+ minutes. Something is just wrong
+about it. Since the tool's verbose mode is not implemented, I couldn't debug it any further.
+
 ## Installation
 
 ```bash
