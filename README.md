@@ -44,7 +44,9 @@ We recommend to add a pre-commit Git hook so that any modified PHP files are
 prettified right before the commit:
 
 ```bash
-$ cat .git/hooks/pre_commit
+$ cat .git/hooks/pre-commit
+
+git diff --staged --diff-filter=dx --name-only HEAD | grep ".*\.php$" | xargs -I % sh -c 'vendor/bin/prettyhp  %; git add %'
 ```
 
 ## Manual usage
