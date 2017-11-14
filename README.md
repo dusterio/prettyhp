@@ -46,7 +46,7 @@ prettified right before the commit:
 ```bash
 $ cat .git/hooks/pre-commit
 
-git diff --staged --diff-filter=dx --name-only HEAD | grep ".*\.php$" | xargs -I % sh -c 'vendor/bin/prettyhp  %; git add %'
+git diff --staged --diff-filter=dx --name-only HEAD | grep ".*\.php$" | xargs -I % sh -c 'vendor/bin/prettyhp format %; git add %'
 ```
 
 ## Manual usage
