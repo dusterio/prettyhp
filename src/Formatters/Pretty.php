@@ -32,6 +32,7 @@ class Pretty extends Standard
                 }
             }
 
+            if ($node instanceof Stmt\Return_ && isset($nodes[$key - 1]) && ! $nodes[$key - 1] instanceof Stmt\Foreach_ && ! $nodes[$key - 1] instanceof  Stmt\If_) $result .= "\n";
             if (isset($nodes[$key - 1]) && $node instanceof Stmt\Class_ && $nodes[$key - 1] instanceof Stmt\Use_) $result .= "\n";
             $result .= "\n" . $this->p($node) . ($node instanceof Expr ? ';' : '');
         }
@@ -57,14 +58,6 @@ class Pretty extends Standard
      */
     protected function pStmt_Throw(Stmt\Throw_ $node) {
         return "\n" . parent::pStmt_Throw($node);
-    }
-
-    /**
-     * @param Stmt\Return_ $node
-     * @return string
-     */
-    protected function pStmt_Return(Stmt\Return_ $node) {
-        return "\n" . parent::pStmt_Return($node);
     }
 
     /**

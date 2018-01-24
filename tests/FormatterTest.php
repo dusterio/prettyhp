@@ -28,6 +28,7 @@ class FormatterTest extends PHPUnit_Framework_TestCase {
     {
         $formatter = new \Dusterio\PrettyHP\Services\Formatter();
         $code = file_get_contents(dirname(__FILE__) . '/artifacts/test3-mailable.php');
+        //echo $formatter->format($code);
         $this->assertEquals(file_get_contents(dirname(__FILE__) . '/artifacts/test3-formatted.php'), $formatter->format($code));
     }
 }

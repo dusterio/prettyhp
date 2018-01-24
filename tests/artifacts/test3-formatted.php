@@ -20,84 +20,84 @@ class Mailable implements MailableContract
      * @var array
      */
     public $from = [];
-
+    
     /**
      * The "to" recipients of the message.
      *
      * @var array
      */
     public $to = [];
-
+    
     /**
      * The "cc" recipients of the message.
      *
      * @var array
      */
     public $cc = [];
-
+    
     /**
      * The "bcc" recipients of the message.
      *
      * @var array
      */
     public $bcc = [];
-
+    
     /**
      * The "reply to" recipients of the message.
      *
      * @var array
      */
     public $replyTo = [];
-
+    
     /**
      * The subject of the message.
      *
      * @var string
      */
     public $subject;
-
+    
     /**
      * The view to use for the message.
      *
      * @var string
      */
     public $view;
-
+    
     /**
      * The plain text view to use for the message.
      *
      * @var string
      */
     public $textView;
-
+    
     /**
      * The view data for the message.
      *
      * @var array
      */
     public $viewData = [];
-
+    
     /**
      * The attachments for the message.
      *
      * @var array
      */
     public $attachments = [];
-
+    
     /**
      * The raw attachments for the message.
      *
      * @var array
      */
     public $rawAttachments = [];
-
+    
     /**
      * The callbacks for the message.
      *
      * @var array
      */
     public $callbacks = [];
-
+    
     /**
      * Send the message using the given mailer.
      *
@@ -116,7 +116,7 @@ class Mailable implements MailableContract
                 ->runCallbacks($message);
         });
     }
-
+    
     /**
      * Queue the message for sending.
      *
@@ -126,9 +126,9 @@ class Mailable implements MailableContract
     public function queue(Queue $queue)
     {
         $connection = property_exists($this, 'connection') ? $this->connection : null;
-
+        
         $queueName = property_exists($this, 'queue') ? $this->queue : null;
-
+        
         if ($queueName) {
             return $queue->connection($connection)->pushOn(
                 $queueName, new SendQueuedMailable($this)
@@ -139,7 +139,7 @@ class Mailable implements MailableContract
             );
         }
     }
-
+    
     /**
      * Deliver the queued message after the given delay.
      *
@@ -150,9 +150,9 @@ class Mailable implements MailableContract
     public function later($delay, Queue $queue)
     {
         $connection = property_exists($this, 'connection') ? $this->connection : null;
-
+        
         $queueName = property_exists($this, 'queue') ? $this->queue : null;
-
+        
         if ($queueName) {
             return $queue->connection($connection)->laterOn(
                 $queueName, $delay, new SendQueuedMailable($this)
@@ -163,7 +163,7 @@ class Mailable implements MailableContract
             );
         }
     }
-
+    
     /**
      * Build the view for the message.
      *
@@ -179,7 +179,7 @@ class Mailable implements MailableContract
             return $this->view;
         }
     }
-
+    
     /**
      * Build the view data for the message.
      *
@@ -194,10 +194,10 @@ class Mailable implements MailableContract
                 $data[$property->getName()] = $property->getValue($this);
             }
         }
-
+        
         return $data;
     }
-
+    
     /**
      * Add the sender to the message.
      *
@@ -209,10 +209,10 @@ class Mailable implements MailableContract
         if (! empty($this->from)) {
             $message->from($this->from[0]['address'], $this->from[0]['name']);
         }
-
+        
         return $this;
     }
-
+    
     /**
      * Add all of the recipients to the message.
      *
@@ -226,10 +226,10 @@ class Mailable implements MailableContract
                 $message->{$type}($recipient['address'], $recipient['name']);
             }
         }
-
+        
         return $this;
     }
-
+    
     /**
      * Set the subject for the message.
      *
@@ -243,10 +243,10 @@ class Mailable implements MailableContract
         } else {
             $message->subject(Str::title(Str::snake(class_basename($this), ' ')));
         }
-
+        
         return $this;
     }
-
+    
     /**
      * Add all of the attachments to the message.
      *
@@ -258,16 +258,16 @@ class Mailable implements MailableContract
         foreach ($this->attachments as $attachment) {
             $message->attach($attachment['file'], $attachment['options']);
         }
-
+        
         foreach ($this->rawAttachments as $attachment) {
             $message->attachData(
                 $attachment['data'], $attachment['name'], $attachment['options']
             );
         }
-
+        
         return $this;
     }
-
+    
     /**
      * Run the callbacks for the message.
      *
@@ -279,10 +279,10 @@ class Mailable implements MailableContract
         foreach ($this->callbacks as $callback) {
             $callback($message->getSwiftMessage());
         }
-
+        
         return $this;
     }
-
+    
     /**
      * Set the priority of this message.
      *
@@ -299,7 +299,7 @@ class Mailable implements MailableContract
 
         return $this;
     }
-
+    
     /**
      * Set the sender of the message.
      *
@@ -311,7 +311,7 @@ class Mailable implements MailableContract
     {
         return $this->setAddress($address, $name, 'from');
     }
-
+    
     /**
      * Set the recipients of the message.
      *
@@ -323,7 +323,7 @@ class Mailable implements MailableContract
     {
         return $this->setAddress($address, $name, 'to');
     }
-
+    
     /**
      * Set the recipients of the message.
      *
@@ -335,7 +335,7 @@ class Mailable implements MailableContract
     {
         return $this->setAddress($address, $name, 'cc');
     }
-
+    
     /**
      * Set the recipients of the message.
      *
@@ -347,7 +347,7 @@ class Mailable implements MailableContract
     {
         return $this->setAddress($address, $name, 'bcc');
     }
-
+    
     /**
      * Set the "reply to" address of the message.
      *
@@ -359,7 +359,7 @@ class Mailable implements MailableContract
     {
         return $this->setAddress($address, $name, 'replyTo');
     }
-
+    
     /**
      * Set the recipients of the message.
      *
@@ -373,7 +373,7 @@ class Mailable implements MailableContract
         if (is_object($address) && ! $address instanceof Collection) {
             $address = [$address];
         }
-
+        
         if ($address instanceof Collection || is_array($address)) {
             foreach ($address as $user) {
                 $user = $this->parseUser($user);
@@ -383,10 +383,10 @@ class Mailable implements MailableContract
         } else {
             $this->{$property}[] = compact('address', 'name');
         }
-
+        
         return $this;
     }
-
+    
     /**
      * Parse the given user into an object.
      *
@@ -400,10 +400,10 @@ class Mailable implements MailableContract
         } elseif (is_string($user)) {
             return (object) ['email' => $user];
         }
-
+        
         return $user;
     }
-
+    
     /**
      * Set the subject of the message.
      *
@@ -413,10 +413,10 @@ class Mailable implements MailableContract
     public function subject($subject)
     {
         $this->subject = $subject;
-
+        
         return $this;
     }
-
+    
     /**
      * Set the view and view data for the message.
      *
@@ -428,10 +428,10 @@ class Mailable implements MailableContract
     {
         $this->view = $view;
         $this->viewData = $data;
-
+        
         return $this;
     }
-
+    
     /**
      * Set the plain text view for the message.
      *
@@ -443,10 +443,10 @@ class Mailable implements MailableContract
     {
         $this->textView = $textView;
         $this->viewData = $data;
-
+        
         return $this;
     }
-
+    
     /**
      * Set the view data for the message.
      *
@@ -461,10 +461,10 @@ class Mailable implements MailableContract
         } else {
             $this->viewData[$key] = $value;
         }
-
+        
         return $this;
     }
-
+    
     /**
      * Attach a file to the message.
      *
@@ -475,10 +475,10 @@ class Mailable implements MailableContract
     public function attach($file, array $options = [])
     {
         $this->attachments[] = compact('file', 'options');
-
+        
         return $this;
     }
-
+    
     /**
      * Attach in-memory data as an attachment.
      *
@@ -490,10 +490,10 @@ class Mailable implements MailableContract
     public function attachData($data, $name, array $options = [])
     {
         $this->rawAttachments[] = compact('data', 'name', 'options');
-
+        
         return $this;
     }
-
+    
     /**
      * Register a callback to be called with the Swift message instance.
      *
@@ -503,10 +503,10 @@ class Mailable implements MailableContract
     public function withSwiftMessage($callback)
     {
         $this->callbacks[] = $callback;
-
+        
         return $this;
     }
-
+    
     /**
      * Dynamically bind parameters to the message.
      *
@@ -521,7 +521,7 @@ class Mailable implements MailableContract
         if (Str::startsWith($method, 'with')) {
             return $this->with(Str::snake(substr($method, 4)), $parameters[0]);
         }
-
+        
         throw new BadMethodCallException("Method [{$method}] does not exist on mailable.");
     }
 }
