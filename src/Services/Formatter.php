@@ -2,6 +2,7 @@
 
 namespace Dusterio\PrettyHP\Services;
 
+use PhpParser\Error;
 use PhpParser\ParserFactory;
 use Dusterio\PrettyHP\Formatters\Pretty;
 
@@ -24,7 +25,11 @@ class Formatter
         $parser = (new ParserFactory)->create(ParserFactory::PREFER_PHP7);
         $prettyPrinter = new Pretty;
 
-        $statements = $parser->parse($input);
+        try {
+            $statements = $parser->parse($input);
+        } catch (Error $e) {
+            return false;
+        }
 
         uasort($statements, function($nodeA, $nodeB) {
             $classA = get_class($nodeA);
@@ -40,6 +45,6 @@ class Formatter
             return ($priorityA < $priorityB) ? -1 : 1;
         });
 
-        return $prettyPrinter->prettyPrintFile($statements);
+        return $prettyPrinter->prettyPrintFile($statements) . "\n";
     }
 }

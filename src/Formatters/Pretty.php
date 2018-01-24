@@ -44,6 +44,16 @@ class Pretty extends Standard
     }
 
     /**
+     * @param Stmt\TryCatch $node
+     * @return string
+     */
+    protected function pStmt_TryCatch(Stmt\TryCatch $node) {
+        return "\ntry {" . $this->pStmts($node->stmts) . "\n" . '}'
+        . $this->pImplode($node->catches)
+        . ($node->finally !== null ? $this->p($node->finally) : '');
+    }
+
+    /**
      * Prints reformatted text of the passed comments.
      *
      * @param Comment[] $comments List of comments
@@ -59,6 +69,6 @@ class Pretty extends Standard
 
         $comments = implode("\n", $formattedComments);
 
-        return preg_replace('/(\*\n\s*\*\s*\n)/', '', $comments);
+        return preg_replace('/( *\*\n\s*\*\s*\n)/', '', $comments);
     }
 }
