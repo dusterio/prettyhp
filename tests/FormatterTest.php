@@ -20,4 +20,14 @@ class FormatterTest extends PHPUnit_Framework_TestCase {
         $code = file_get_contents(dirname(__FILE__) . '/artifacts/test2-broken.php');
         $this->assertEquals(false, $formatter->format($code));
     }
+
+    /**
+     * @test
+     */
+    public function laravel_mailable_class_is_formatted_correctly()
+    {
+        $formatter = new \Dusterio\PrettyHP\Services\Formatter();
+        $code = file_get_contents(dirname(__FILE__) . '/artifacts/test3-mailable.php');
+        $this->assertEquals(file_get_contents(dirname(__FILE__) . '/artifacts/test3-formatted.php'), $formatter->format($code));
+    }
 }

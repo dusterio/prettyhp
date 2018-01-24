@@ -48,9 +48,23 @@ class Pretty extends Standard
      * @return string
      */
     protected function pStmt_TryCatch(Stmt\TryCatch $node) {
-        return "\ntry {" . $this->pStmts($node->stmts) . "\n" . '}'
-        . $this->pImplode($node->catches)
-        . ($node->finally !== null ? $this->p($node->finally) : '');
+        return "\n" . parent::pStmt_TryCatch($node);
+    }
+
+    /**
+     * @param Stmt\Throw_ $node
+     * @return string
+     */
+    protected function pStmt_Throw(Stmt\Throw_ $node) {
+        return "\n" . parent::pStmt_Throw($node);
+    }
+
+    /**
+     * @param Stmt\Return_ $node
+     * @return string
+     */
+    protected function pStmt_Return(Stmt\Return_ $node) {
+        return "\n" . parent::pStmt_Return($node);
     }
 
     /**
