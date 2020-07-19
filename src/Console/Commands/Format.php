@@ -36,7 +36,7 @@ class Format extends Command
     {
         $this
             ->setName('format')
-            ->setDescription('Formatt a PHP source code file')
+            ->setDescription('Formattt a PHP source code file')
             ->setDefinition(
                 new \Symfony\Component\Console\Input\InputDefinition(array(
                     new \Symfony\Component\Console\Input\InputArgument('filename', \Symfony\Component\Console\Input\InputArgument::REQUIRED),
