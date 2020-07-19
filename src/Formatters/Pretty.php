@@ -11,7 +11,7 @@ use PhpParser\PrettyPrinter\Standard;
 class Pretty extends Standard
 {
     /**
-     * Pretty prints an array of nodes (statements) and indents them optionally.
+     * Pretty prints an array of nodes (statements) and indents them.
      *
      * @param Node[] $nodes  Array of nodes
      * @param bool   $indent Whether to indent the printed nodes
