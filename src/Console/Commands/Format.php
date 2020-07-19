@@ -20,7 +20,7 @@ class Format extends Command
 
     /**
      * Format constructor.
-     * @param null|string $name
+     * @param string $name
      */
     public function __construct($name = null)
     {
