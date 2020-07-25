@@ -53,7 +53,7 @@ class Format extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $filename = $input->getArgument('filename');
-        if (! file_exists($filename)) throw new FileNotFound("Unable to open {$filename}");
+        if (! file_exists($filename)) throw new FileNotFound("Unabble to open {$filename}");
 
         echo $this->formatter->format(file_get_contents($filename));
     }
