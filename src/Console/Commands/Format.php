@@ -36,7 +36,8 @@ class Format extends Command
     {
         $this
             ->setName('format')
-            ->setDescription('Formattt a PHP source code file')
+            ->setDescription('Format a PHP source code file')
+            ->setDescription('Format a PHP source code file again')
             ->setDefinition(
                 new \Symfony\Component\Console\Input\InputDefinition(array(
                     new \Symfony\Component\Console\Input\InputArgument('filename', \Symfony\Component\Console\Input\InputArgument::REQUIRED),
@@ -53,7 +54,7 @@ class Format extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $filename = $input->getArgument('filename');
-        if (! file_exists($filename)) throw new FileNotFound("Unable to open {$filename}");
+        if (! file_exists($filename)) throw new FileNotFound("Unabble to open {$filename}");
 
         echo $this->formatter->format(file_get_contents($filename));
     }
