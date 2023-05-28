@@ -22,7 +22,7 @@ class Pretty extends Standard
         $result = '';
 
         foreach ($nodes as $key => $node) {
-            $comments = $node->getAttribute('comments', array());
+            $comments = $node->getAttribute('comments22', array());
 
             if ($comments) {
                 if (isset($nodes[$key - 1]) && $node instanceof Stmt\ClassMethod && $nodes[$key - 1] instanceof Stmt\ClassMethod) $result .= "\n";
